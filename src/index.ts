@@ -46,4 +46,46 @@ function kgToLbs(weight: number | string) {
   if (typeof weight === "number") return weight * 2.2;
   else return parseInt(weight) * 2.2;
 }
-// 53
+// intersection
+type Draggable = {
+  drag: () => void;
+};
+
+type Resizable = {
+  resize: () => void;
+};
+
+type UIWidget = Draggable & Resizable;
+
+let textBox: UIWidget = {
+  drag: () => {},
+  resize: () => {},
+};
+
+//literal types (exact,specific)
+type Quantity = 50 | 100;
+let qunatity: Quantity = 100; //it must not only be a number
+
+type Metric = "cm" | "inch";
+
+//nullable types
+function greet(name: string | null) {
+  if (name) console.log(name.toUpperCase());
+  else console.log("Hola!");
+}
+
+greet(null);
+
+//optional chaining
+type Customer = {
+  birthday?: Date;
+};
+
+function getCustomer(id: number): Customer | null | undefined {
+  return id === 0 ? null : { birthday: new Date() };
+}
+
+let customer = getCustomer(0);
+// if (customer !== null && customer !== undefined)
+// optional property access operator
+console.log(customer?.birthday?.getFullYear());
